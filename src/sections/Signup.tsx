@@ -18,7 +18,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import axios from "axios";
 import { API_BASE_URL } from "../config";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useUserInfoApi from "../hooks/useUserInfoApi";
 
 interface SignupValues {
@@ -29,6 +29,7 @@ interface SignupValues {
 }
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState<SignupValues>({
     name: "",
     email: "",
@@ -162,6 +163,7 @@ const Signup = () => {
                   password: "",
                   dob: null,
                 });
+                navigate('/');
               })
               .catch((error) => {
                 console.error(error);

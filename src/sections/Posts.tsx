@@ -110,14 +110,14 @@ const Posts = () => {
         </Typography>
         <Box sx={{ mx: "auto" }}>
           <div className="flex flex-wrap justify-between items-center">
-          <AddPost setData={setData} userData={userData} users={users} />
-          <Button
-            variant="contained"
-            color="info"
-            onClick={() => logout(navigate)}
-          >
-            Logout
-          </Button>
+            <AddPost setData={setData} userData={userData} users={users} />
+            <Button
+              variant="contained"
+              color="info"
+              onClick={() => logout(navigate)}
+            >
+              Logout
+            </Button>
           </div>
           <TableContainer component={Paper}>
             <Table sx={{ mt: "1rem" }} aria-label="customized table">
@@ -158,6 +158,14 @@ const Posts = () => {
                       <StyledTableCell align="right">
                         {item?.userId === userData?.id ? (
                           <>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              className="!mx-2"
+                              onClick={() => navigate(`/posts/${item?.id}`)}
+                            >
+                              View
+                            </Button>
                             <EditPost
                               rowId={item?.id}
                               setData={setData}
