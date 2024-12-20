@@ -115,61 +115,82 @@ const PostDetail = () => {
                   Updated:{" "}
                   {moment(post?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
                 </p>
-                <div className="text-red-600 text-2xl mt-8">Comments</div>
+                <div className="text-red-600 text-xl mt-8">Comments</div>
                 <div className="mt-2 ">
-                  <div className="border-4 border-indigo-600 p-4 mb-12">
-                    {comments?.length > 0 ? (
-                      comments?.map((item: any) => (
-                        <div key={item?.id}>
-                          <div className="mt-4 flex flex-wrap items-center justify-between ml-16 ">
-                            <div className="text-left">{item?.text}</div>
-                            <div>
-                              <EditComment
-                                rowId={item?.id}
-                                setData={setComments}
-                                data={comments}
-                              />
-                              <Button
-                                variant="contained"
-                                color="error"
-                                className="!mx-2"
-                                onClick={() => handleDelete(item?.id)}
-                              >
-                                Delete
-                              </Button>
+                  {comments && comments?.length > 0 ? (
+                    <>
+                      <div className="border-4 border-indigo-600 p-4 mb-12">
+
+                        {comments?.map((item: any) => (
+                          <div key={item?.id}>
+                            <div className="mt-4 flex flex-wrap items-center justify-between ml-16 ">
+                              <div className="text-left">{item?.text}</div>
+                              <div>
+                                <EditComment
+                                  rowId={item?.id}
+                                  setData={setComments}
+                                  data={comments}
+                                />
+                                <Button
+                                  variant="contained"
+                                  color="error"
+                                  className="!mx-2"
+                                  onClick={() => handleDelete(item?.id)}
+                                >
+                                  Delete
+                                </Button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-center text-xl">
-                        No Comments added yet
+                        ))}
+                        
                       </div>
-                    )}
-                  </div>
-                  <div className="!mt-4 mb-16">
-                    <TextField
-                      label="Comments"
-                      name="comments"
-                      variant="outlined"
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                      size="small"
-                    />
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={handleAddComment}
-                      className="!ml-3"
-                    >
-                      Add Comment
-                    </Button>
-                  </div>
+                      <div className="!mt-4 mb-16">
+                        <TextField
+                          label="Comments"
+                          name="comments"
+                          variant="outlined"
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                          size="small"
+                        />
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={handleAddComment}
+                          className="!ml-3"
+                        >
+                          Add Comment
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="!mt-4 mb-16">
+                        <TextField
+                          label="Comments"
+                          name="comments"
+                          variant="outlined"
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                          size="small"
+                        />
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={handleAddComment}
+                          className="!ml-3"
+                        >
+                          Add Comment
+                        </Button>
+                      </div>
+                    </>
+                  )}
                   <div className="!my-2"></div>
                 </div>
               </div>
             ) : (
-              <div className="text-center mt-16 text-4xl">No Post found</div>
+              ""
             )}
           </div>
         </div>
