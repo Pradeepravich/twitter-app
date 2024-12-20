@@ -11,6 +11,7 @@ import useUserByIdApi from "../services/useUserByIdApi";
 import useLogout from "../hooks/useLogout";
 import { logout } from "../utils/reusable";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import EditComment from "../components/EditComment";
 
 const PostDetail = () => {
   const { id } = useParams<{ id: string }>(); // Access the 'id' from the URL
@@ -100,7 +101,7 @@ const PostDetail = () => {
               Logout
             </Button>
           </div>
-          <div className="text-center mt-8">
+          <div className="text-center mt-8 w-[50%] mx-auto ">
             {id ? (
               <div>
                 <h1>Title: {post?.title}</h1>
@@ -114,28 +115,35 @@ const PostDetail = () => {
                   Updated:{" "}
                   {moment(post?.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
                 </p>
-                <div className="mt-4">
+                <div className="mt-2 ">
                   {comments && comments?.length > 0 ? (
                     <>
-                      <span>
-                        Comments:{" "}
-                        {comments?.map((comment) => (
-                          <div key={comment?.id}>
-                            <p className="mt-4">
-                              {comment?.text}
+                      <div className="border-4 border-indigo-600 p-4 my-12">
+                        <span className="text-red-600 text-xl">Comments</span>
+                        {comments?.map((item: any) => (
+                          <div key={item?.id}>
+                            <div className="mt-4 flex flex-wrap items-center justify-between ml-16 ">
+                              <div className="text-left">{item?.text}</div>
+                              <div>
+                              <EditComment
+                              rowId={item?.id}
+                              setData={setComments}
+                              data={comments}
+                            />
                               <Button
                                 variant="contained"
                                 color="error"
                                 className="!mx-2"
-                                onClick={() => handleDelete(comment?.id)}
+                                onClick={() => handleDelete(item?.id)}
                               >
                                 Delete
                               </Button>
-                            </p>
+                              </div>
+                            </div>
                           </div>
                         ))}
-                      </span>
-                      <div className="!mt-4">
+                      </div>
+                      <div className="!mt-4 mb-16">
                         <TextField
                           label="Comments"
                           name="comments"
@@ -156,7 +164,7 @@ const PostDetail = () => {
                     </>
                   ) : (
                     <>
-                      <div className="!mt-4">
+                      <div className="!mt-4 mb-16">
                         <TextField
                           label="Comments"
                           name="comments"
