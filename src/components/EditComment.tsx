@@ -70,7 +70,7 @@ const EditComment = ({ rowId, setData, data }: EditPostProps) => {
         };
         const response = await updateComment(formattedValues);
         setData((prev) => {
-          return prev.map((item) =>
+          return prev.map((item:any) =>
             item?.id === rowId ? formattedValues : item
           );
         });
@@ -93,7 +93,7 @@ const EditComment = ({ rowId, setData, data }: EditPostProps) => {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Edit Posts"}</DialogTitle>
+        <DialogTitle>{"Edit Comments"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <Box
